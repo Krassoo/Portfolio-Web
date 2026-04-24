@@ -103,8 +103,15 @@ export default function Terminal() {
             className="fixed bottom-20 right-6 z-40 w-full max-w-lg border border-gray-600 bg-black shadow-2xl"
           >
             {/* Simple CMD title */}
-            <div className="border-b border-gray-600 bg-gray-800 px-4 py-2">
+            <div className="flex items-center justify-between border-b border-gray-600 bg-gray-800 px-4 py-2">
               <h3 className="font-mono text-sm font-semibold text-white">Command Prompt - portfolio@daniel</h3>
+              <button
+                onClick={() => setLogs([{ id: 'cleared', text: 'Terminal cleared', isInput: false }])}
+                className="text-gray-400 hover:text-white transition-colors text-xs px-2 py-1 rounded border border-gray-600 hover:border-gray-400"
+                title="Clear Terminal"
+              >
+                Clear
+              </button>
             </div>
 
             {/* Terminal content */}

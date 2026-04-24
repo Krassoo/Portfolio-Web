@@ -9,8 +9,8 @@
 
 html.light {
   color-scheme: light;
-  background-color: #F8FAFC;
-  color: #1E293B;
+  background-color: #FFFFFF;
+  color: #0F172A;
 }
 
 html {
@@ -27,8 +27,8 @@ body {
 }
 
 html.light body {
-  background: #F8FAFC;
-  color: #1E293B;
+  background: #FFFFFF;
+  color: #0F172A;
 }
 
 * {
@@ -66,11 +66,11 @@ html {
 }
 
 html.light {
-  --bg-primary: #F8FAFC;
-  --bg-secondary: #F1F5F9;
-  --text-primary: #1E293B;
-  --text-secondary: #64748B;
-  --border: #E2E8F0;
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F8FAFC;
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
+  --border: #CBD5E1;
 }
 
 /* Force text colors in light mode */
@@ -91,6 +91,6 @@ html.light div {
 }
 
 html.light section {
-  color: #1E293B;
+  color: #0F172A;
 }
 
