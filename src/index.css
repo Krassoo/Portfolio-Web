@@ -23,12 +23,13 @@ body {
   background: #0F172A;
   color: #E2E8F0;
   font-family: Inter, sans-serif;
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="6" fill="%233B82F6" opacity="0.8"/><circle cx="16" cy="16" r="10" fill="none" stroke="%233B82F6" stroke-width="1" opacity="0.4"/></svg>') 16 16, auto;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="8" fill="none" stroke="%23FFFFFF" stroke-width="2"/><circle cx="16" cy="16" r="4" fill="%233B82F6" opacity="0.9"/></svg>') 16 16, auto;
 }
 
 html.light body {
   background: #FFFFFF;
   color: #0F172A;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="8" fill="none" stroke="%23000000" stroke-width="2"/><circle cx="16" cy="16" r="4" fill="%233B82F6" opacity="0.9"/></svg>') 16 16, auto;
 }
 
 * {
@@ -48,7 +49,12 @@ img {
 /* Custom cursor */
 a,
 button {
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="6" fill="%233B82F6"/><circle cx="16" cy="16" r="10" fill="none" stroke="%233B82F6" stroke-width="1.5" opacity="0.6"/></svg>') 16 16, pointer;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="8" fill="none" stroke="%23FFFFFF" stroke-width="2"/><circle cx="16" cy="16" r="4" fill="%233B82F6"/></svg>') 16 16, pointer;
+}
+
+html.light a,
+html.light button {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="8" fill="none" stroke="%23000000" stroke-width="2"/><circle cx="16" cy="16" r="4" fill="%233B82F6"/></svg>') 16 16, pointer;
 }
 
 input,
@@ -67,9 +73,9 @@ html {
 
 html.light {
   --bg-primary: #FFFFFF;
-  --bg-secondary: #F8FAFC;
+  --bg-secondary: #F1F5F9;
   --text-primary: #0F172A;
-  --text-secondary: #334155;
+  --text-secondary: #1E293B;
   --border: #CBD5E1;
 }
 
@@ -87,10 +93,10 @@ html.light button,
 html.light input,
 html.light textarea,
 html.light div {
-  color: inherit;
+  color: #0F172A !important;
 }
 
 html.light section {
-  color: #0F172A;
+  color: #0F172A !important;
 }
 
