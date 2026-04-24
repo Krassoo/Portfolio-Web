@@ -17,144 +17,144 @@ const skillsTree: FileNode = {
   children: [
     {
       id: 'about',
-      name: '👤 About Me',
+      name: 'About Me',
       type: 'file',
-      content: `Olá! Sou Daniel Wahba Krasilchik, Desenvolvedor Full Stack brasileiro com experiência internacional em Israel.
+      content: `Hello! I'm Daniel Wahba Krasilchik, a Brazilian Full Stack Developer with international experience in Israel.
 
-🎯 Especialista em desenvolvimento web moderno com foco em React, TypeScript e soluções escaláveis.
+Specialist in modern web development with focus on React, TypeScript, and scalable solutions.
 
-🌍 Experiência internacional: Trabalhei em startups israelenses, desenvolvendo aplicações de alta performance.
+International Experience: Worked in Israeli startups, developing high-performance applications.
 
-💡 Apaixonado por tecnologia, resolução de problemas complexos e criação de experiências digitais excepcionais.
+Passionate about technology, solving complex problems, and creating exceptional digital experiences.
 
-🚀 Sempre buscando aprender novas tecnologias e contribuir para projetos inovadores.`
+Always seeking to learn new technologies and contribute to innovative projects.`
     },
     {
       id: 'skills',
-      name: '🛠️ Skills',
+      name: 'Skills',
       type: 'folder',
       children: [
         {
           id: 'frontend',
           name: 'Frontend Development',
           type: 'file',
-          content: `🎨 FRONTEND EXPERTISE:
+          content: `FRONTEND EXPERTISE:
 
-• React: Componentes avançados, hooks personalizados, otimização de performance
-• TypeScript: Tipagem estática, generics, desenvolvimento type-safe
-• JavaScript: ES6+, async/await, padrões modernos, manipulação DOM
-• CSS/Tailwind: Design responsivo, animações, UI/UX moderna
-• Next.js: SSR, SSG, otimização SEO, aplicações full-stack
+• React: Advanced components, custom hooks, performance optimization
+• TypeScript: Static typing, generics, type-safe development
+• JavaScript: ES6+, async/await, modern patterns, DOM manipulation
+• CSS/Tailwind: Responsive design, animations, modern UI/UX
+• Next.js: SSR, SSG, SEO optimization, full-stack applications
 
-💡 Experiência prática em desenvolvimento de interfaces complexas e interativas.`
+Practical experience in developing complex and interactive interfaces.`
         },
         {
           id: 'backend',
           name: 'Backend Development',
           type: 'file',
-          content: `⚙️ BACKEND SKILLS:
+          content: `BACKEND SKILLS:
 
-• Python: Desenvolvimento backend, APIs, automação de processos
-• SQL: Design de bancos de dados, otimização de queries, PostgreSQL/MySQL
-• REST APIs: Desenvolvimento e integração de APIs RESTful
-• Node.js: Express.js, desenvolvimento de servidores, APIs
-• Database Design: Modelagem relacional, normalização, performance
+• Python: Backend development, APIs, process automation
+• SQL: Database design, query optimization, PostgreSQL/MySQL
+• REST APIs: RESTful API development and integration
+• Node.js: Express.js, server development, APIs
+• Database Design: Relational modeling, normalization, performance
 
-🔧 Foco em soluções escaláveis e arquitetura robusta.`
+Focus on scalable solutions and robust architecture.`
         },
         {
           id: 'tools',
           name: 'Tools & Workflow',
           type: 'file',
-          content: `🛠️ FERRAMENTAS E METODOLOGIAS:
+          content: `TOOLS AND METHODOLOGIES:
 
-• Git: Controle de versão, branching strategies, GitFlow
-• Playwright: Testes E2E automatizados, testes de integração
-• Agile/Scrum: Desenvolvimento iterativo, sprints, cerimônias
-• Docker: Containerização, ambientes de desenvolvimento
-• CI/CD: Pipelines automatizados, deploy contínuo
+• Git: Version control, branching strategies, GitFlow
+• Playwright: Automated E2E testing, integration testing
+• Agile/Scrum: Iterative development, sprints, ceremonies
+• Docker: Containerization, development environments
+• CI/CD: Automated pipelines, continuous deployment
 
-📈 Experiência em ambientes de desenvolvimento colaborativo e ágil.`
+Experience in collaborative development environments and agile practices.`
         },
       ],
     },
     {
       id: 'projects',
-      name: '📂 Projects',
+      name: 'Projects',
       type: 'folder',
       children: [
         {
           id: 'ai-assistant',
           name: 'AI Study Assistant',
           type: 'file',
-          content: `🤖 AI STUDY ASSISTANT
+          content: `AI STUDY ASSISTANT
 
-• Aplicação web inteligente para auxiliar estudantes
-• Tecnologias: React, TypeScript, OpenAI API, Node.js
-• Funcionalidades: Geração de resumos, explicações personalizadas, quizzes adaptativos
-• Impacto: Aumentou eficiência de estudo em 40% para usuários beta
+• Intelligent web application to assist students
+• Technologies: React, TypeScript, OpenAI API, Node.js
+• Features: Summary generation, personalized explanations, adaptive quizzes
+• Impact: Increased study efficiency by 40% for beta users
 
-🚀 Projeto pessoal demonstrando integração de IA em educação.`
+Personal project demonstrating AI integration in education.`
         },
         {
           id: 'dashboard',
           name: 'Data Visualization Dashboard',
           type: 'file',
-          content: `📊 DATA DASHBOARD INTERATIVO
+          content: `INTERACTIVE DATA DASHBOARD
 
-• Dashboard analítico com visualizações em tempo real
-• Tecnologias: React, D3.js, WebSocket, Express.js
-• Funcionalidades: Gráficos dinâmicos, filtros avançados, exportação de dados
-• Usuários: +500 usuários ativos mensalmente
+• Analytical dashboard with real-time visualizations
+• Technologies: React, D3.js, WebSocket, Express.js
+• Features: Dynamic charts, advanced filters, data export
+• Users: +500 active monthly users
 
-💡 Solução completa para análise de dados empresariais.`
+Complete solution for business data analysis.`
         },
         {
           id: 'productivity',
           name: 'Productivity Management App',
           type: 'file',
-          content: `⚡ PRODUCTIVITY APP
+          content: `PRODUCTIVITY APP
 
-• Aplicação full-stack para gestão de produtividade
-• Tecnologias: React, Node.js, PostgreSQL, JWT
-• Funcionalidades: Gerenciamento de tarefas, time tracking, relatórios, notificações
-• Recursos: API REST, autenticação segura, interface responsiva
+• Full-stack application for productivity management
+• Technologies: React, Node.js, PostgreSQL, JWT
+• Features: Task management, time tracking, reports, notifications
+• Resources: REST API, secure authentication, responsive interface
 
-🎯 Ferramenta completa para otimização de workflows pessoais e empresariais.`
+Complete tool for personal and business workflow optimization.`
         },
       ],
     },
     {
       id: 'experience',
-      name: '💼 Professional Experience',
+      name: 'Professional Experience',
       type: 'folder',
       children: [
         {
           id: 'docflo',
           name: 'Docflo.ai - Frontend Developer',
           type: 'file',
-          content: `🏢 DOCFLO.AI - TEL AVIV, ISRAEL
+          content: `DOCFLO.AI - TEL AVIV, ISRAEL
 
-• Cargo: Frontend Developer (2023-2024)
-• Tecnologias: React, TypeScript, Redux, Material-UI
-• Responsabilidades: Desenvolvimento de interfaces para plataforma de gestão documental
-• Conquistas: Implementação de novos recursos, otimização de performance, colaboração internacional
-• Impacto: Contribuição para crescimento da startup em 200% durante o período
+• Position: Frontend Developer (2023-2024)
+• Technologies: React, TypeScript, Redux, Material-UI
+• Responsibilities: Developing interfaces for document management platform
+• Achievements: Implementation of new features, performance optimization, international collaboration
+• Impact: Contributed to 200% startup growth during the period
 
-🌍 Experiência valiosa em ambiente startup israelense, com foco em inovação e agilidade.`
+Valuable experience in Israeli startup environment, focused on innovation and agility.`
         },
         {
           id: 'freelance',
           name: 'Freelance Development',
           type: 'file',
-          content: `💻 DESENVOLVIMENTO FREELANCE
+          content: `FREELANCE DEVELOPMENT
 
-• Projetos diversos: E-commerce, landing pages, aplicações web
-• Clientes: Startups brasileiras e internacionais
-• Tecnologias: React, Next.js, WordPress, PHP, MySQL
-• Serviços: Desenvolvimento completo, consultoria técnica, manutenção
+• Diverse projects: E-commerce, landing pages, web applications
+• Clients: Brazilian and international startups
+• Technologies: React, Next.js, WordPress, PHP, MySQL
+• Services: Full development, technical consulting, maintenance
 
-🎨 Portfólio diversificado demonstrando versatilidade e adaptabilidade em diferentes contextos.`
+Diverse portfolio demonstrating versatility and adaptability in different contexts.`
         },
       ],
     },
@@ -163,14 +163,14 @@ const skillsTree: FileNode = {
 
 export default function SkillsFileExplorer() {
   const [selectedFolder, setSelectedFolder] = useState<FileNode | null>(null)
-  const [selectedContent, setSelectedContent] = useState<string>('Selecione uma pasta ou arquivo para ver mais detalhes...')
+  const [selectedContent, setSelectedContent] = useState<string>('Select a folder or file to view more details...')
 
   const handleFolderClick = (folder: FileNode) => {
     setSelectedFolder(folder)
     if (folder.type === 'file' && folder.content) {
       setSelectedContent(folder.content)
     } else {
-      setSelectedContent(`Conteúdo da pasta: ${folder.name}`)
+      setSelectedContent(`Folder content: ${folder.name}`)
     }
   }
 
@@ -194,7 +194,7 @@ export default function SkillsFileExplorer() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Folders */}
         <div className="space-y-2">
-          <h4 className="text-slate-300 light:text-slate-700 font-semibold">Pastas Principais:</h4>
+          <h4 className="text-slate-300 light:text-slate-700 font-semibold">Main Folders:</h4>
           <div className="space-y-1">
             {skillsTree.children?.map((item) => (
               <motion.button
@@ -218,7 +218,7 @@ export default function SkillsFileExplorer() {
         {/* Files in Selected Folder */}
         <div className="space-y-2">
           <h4 className="text-slate-300 light:text-slate-700 font-semibold">
-            {selectedFolder ? `Arquivos em ${selectedFolder.name}:` : 'Selecione uma pasta'}
+            {selectedFolder ? `Files in ${selectedFolder.name}:` : 'Select a folder'}
           </h4>
           <div className="space-y-1">
             {selectedFolder?.children?.map((file) => (
@@ -238,7 +238,7 @@ export default function SkillsFileExplorer() {
 
         {/* Content Display */}
         <div className="space-y-2">
-          <h4 className="text-slate-300 light:text-slate-700 font-semibold">Conteúdo:</h4>
+          <h4 className="text-slate-300 light:text-slate-700 font-semibold">Content:</h4>
           <div className="rounded-lg border border-slate-700/50 bg-slate-800/50 p-4 min-h-[300px] text-slate-200 light:bg-slate-100 light:border-slate-300 light:text-slate-800">
             <pre className="whitespace-pre-wrap font-mono text-sm leading-relaxed">{selectedContent}</pre>
           </div>
@@ -247,7 +247,7 @@ export default function SkillsFileExplorer() {
 
       <div className="mt-6 pt-4 border-t border-slate-700/50 light:border-slate-300">
         <p className="text-xs text-slate-500 light:text-slate-600">
-          💡 Clique nas pastas para explorar arquivos, depois clique nos arquivos para ver detalhes completos!
+          Click on folders to explore files, then click on files to view complete details!
         </p>
       </div>
     </div>
