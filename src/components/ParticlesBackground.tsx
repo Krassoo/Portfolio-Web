@@ -30,13 +30,13 @@ export default function ParticlesBackground() {
     window.addEventListener('resize', resizeCanvas)
 
     // Initialize particles
-    const particleCount = 50
+    const particleCount = 200
     particlesRef.current = Array.from({ length: particleCount }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 2,
-      vy: (Math.random() - 0.5) * 2,
-      radius: Math.random() * 3 + 2,
+      vx: (Math.random() - 0.5) * 6,
+      vy: (Math.random() - 0.5) * 6,
+      radius: Math.random() * 4 + 1.5,
       color: `hsl(${Math.random() * 60 + 200}, 70%, 60%)`,
     }))
 

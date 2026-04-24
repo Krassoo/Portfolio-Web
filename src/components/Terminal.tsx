@@ -1,13 +1,18 @@
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useRef, useEffect } from 'react'
 
 const commands = {
-  help: 'Available commands: help, about, skills, projects, contact, clear, whoami',
+  help: 'Available commands: help | about | skills | projects | contact | experience | clear | whoami | ls',
   about: 'Hi! I\'m Daniel Wahba Krasilchik, a Full Stack Developer based in Brazil with international experience in Israel.',
-  skills: 'Frontend: React, TypeScript, JavaScript | Backend: Python, SQL, REST APIs | Tools: Git, Playwright, Agile',
-  projects: 'AI Study Assistant • Data Dashboard • Productivity App',
-  contact: 'Email: danielwahbakrasil@gmail.com | GitHub: github.com/Krassoo | LinkedIn: linkedin.com/in/danielwahba',
-  whoami: 'You are a curious visitor exploring my interactive portfolio! 🎉',
+  skills: 'Use "ls" to explore the file system or "cat skills" for a quick overview',
+  projects: '3 major projects: AI Study Assistant, Data Dashboard, and Productivity App',
+  contact: 'Email: danielwahbakrasil@gmail.com | GitHub: github.com/Krassoo',
+  experience: 'Docflo.ai (Israel) - Frontend Developer | Working with React, APIs, and agile teams',
+  whoami: 'You are a curious recruiter exploring my interactive portfolio! 🎯',
+  'cat skills': 'Frontend: React, TypeScript, JavaScript | Backend: Python, SQL, APIs | Tools: Git, Playwright, Agile',
+  ls: 'frontend/  backend/  tools/  projects/  experience/',
+  echo: 'Type "echo [message]" to echo a message',
+  pwd: '/home/danielwahba/portfolio',
   clear: '',
 }
 
@@ -19,7 +24,7 @@ type Log = {
 
 export default function Terminal() {
   const [logs, setLogs] = useState<Log[]>([
-    { id: '1', text: 'Welcome to Daniel\'s Interactive Portfolio Terminal', isInput: false },
+    { id: '1', text: 'Welcome to Daniel\'s Interactive Terminal', isInput: false },
     { id: '2', text: 'Type "help" for available commands', isInput: false },
   ])
   const [input, setInput] = useState('')
@@ -41,7 +46,14 @@ export default function Terminal() {
     ]
 
     if (trimmed === 'clear') {
-      setLogs([])
+      setLogs([{ id: 'cleared', text: 'Terminal cleared', isInput: false }])
+    } else if (trimmed.startsWith('echo ')) {
+      const message = cmd.substring(5)
+      newLogs.push({
+        id: `output-${Date.now()}`,
+        text: message,
+        isInput: false,
+      })
     } else if (trimmed in commands) {
       const response = commands[trimmed as keyof typeof commands]
       if (response) {
@@ -54,7 +66,7 @@ export default function Terminal() {
     } else {
       newLogs.push({
         id: `error-${Date.now()}`,
-        text: `Command not found: ${cmd}. Type "help" for available commands.`,
+        text: `command not found: ${cmd}`,
         isInput: false,
       })
     }
@@ -71,56 +83,64 @@ export default function Terminal() {
 
   return (
     <>
-      <button
+      <motion.button
         onClick={() => setVisible(!visible)}
-        className="fixed bottom-6 right-6 z-40 rounded-full bg-blue-500 p-4 shadow-lg transition hover:bg-blue-600"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        className="fixed bottom-6 right-6 z-40 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 p-4 shadow-lg shadow-blue-500/50 transition hover:shadow-lg hover:shadow-blue-600/50"
         title="Open Terminal"
       >
-        <span className="text-2xl">💻</span>
-      </button>
+        <span className="text-2xl">➤</span>
+      </motion.button>
 
-      {visible && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.8, y: 20 }}
-          className="fixed bottom-20 right-6 z-40 w-96 rounded-2xl border border-slate-700 bg-slate-950/95 shadow-2xl backdrop-blur-xl"
-        >
-          <div className="flex items-center justify-between border-b border-slate-700 px-4 py-3">
-            <h3 className="font-semibold text-white">Terminal</h3>
-            <button
-              onClick={() => setVisible(false)}
-              className="text-slate-400 transition hover:text-white"
-            >
-              ✕
-            </button>
-          </div>
+      <AnimatePresence>
+        {visible && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.7, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.7, y: 20 }}
+            transition={{ type: 'spring', damping: 20, stiffness: 300 }}
+            className="fixed bottom-20 right-6 z-40 w-full max-w-lg border border-gray-600 bg-black shadow-2xl"
+          >
+            {/* Simple CMD title */}
+            <div className="border-b border-gray-600 bg-gray-800 px-4 py-2">
+              <h3 className="font-mono text-sm font-semibold text-white">Command Prompt - portfolio@daniel</h3>
+            </div>
 
-          <div className="h-64 overflow-y-auto bg-slate-900/50 p-4 font-mono text-sm">
-            {logs.map((log) => (
-              <div
-                key={log.id}
-                className={`mb-2 ${log.isInput ? 'text-blue-300' : 'text-slate-300'}`}
-              >
-                {log.text}
+            {/* Terminal content */}
+            <div className="h-64 overflow-y-auto bg-black p-4 font-mono text-sm text-green-400">
+              {logs.map((log) => (
+                <motion.div
+                  key={log.id}
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-2"
+                >
+                  {log.isInput ? 'C:\\portfolio&gt; ' : ''}
+                  <span>{log.text}</span>
+                </motion.div>
+              ))}
+              <div ref={logsEndRef} />
+            </div>
+
+            {/* Input area */}
+            <div className="border-t border-gray-600 bg-black px-4 py-3">
+              <div className="flex items-center gap-2">
+                <span className="text-green-400">C:\portfolio&gt;</span>
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  placeholder="type command..."
+                  className="flex-1 bg-transparent font-mono text-sm text-green-400 outline-none placeholder-gray-500"
+                  autoFocus
+                />
               </div>
-            ))}
-            <div ref={logsEndRef} />
-          </div>
-
-          <div className="border-t border-slate-700 px-4 py-3">
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Type a command..."
-              className="w-full bg-transparent font-mono text-sm text-white placeholder-slate-500 outline-none"
-              autoFocus
-            />
-          </div>
-        </motion.div>
-      )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }

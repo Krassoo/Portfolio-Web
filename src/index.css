@@ -56,7 +56,15 @@ textarea {
   cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="4" fill="%233B82F6" opacity="0.6"/><circle cx="16" cy="16" r="8" fill="none" stroke="%233B82F6" stroke-width="1" opacity="0.3"/></svg>') 16 16, text;
 }
 
-/* Light mode styles */
+/* Color variables for dark/light mode */
+html {
+  --bg-primary: #0F172A;
+  --bg-secondary: #1E293B;
+  --text-primary: #E2E8F0;
+  --text-secondary: #94A3B8;
+  --border: #475569;
+}
+
 html.light {
   --bg-primary: #F8FAFC;
   --bg-secondary: #F1F5F9;
@@ -65,11 +73,24 @@ html.light {
   --border: #E2E8F0;
 }
 
-html.dark {
-  --bg-primary: #0F172A;
-  --bg-secondary: #1E293B;
-  --text-primary: #E2E8F0;
-  --text-secondary: #94A3B8;
-  --border: #475569;
+/* Force text colors in light mode */
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light h5,
+html.light h6,
+html.light p,
+html.light span,
+html.light a,
+html.light button,
+html.light input,
+html.light textarea,
+html.light div {
+  color: inherit;
+}
+
+html.light section {
+  color: #1E293B;
 }
 
