@@ -1,8 +1,9 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useRef, useEffect } from 'react'
+import { useAIAssistant } from '../hooks/useAIAssistant'
 
 const commands = {
-  help: 'Available commands: help | about | skills | projects | contact | experience | clear | whoami | ls',
+  help: 'Available commands: help | about | skills | projects | contact | experience | clear | whoami | ls | ai [question]',
   about: 'Hi! I\'m Daniel Wahba Krasilchik, a Full Stack Developer based in Brazil with international experience in Israel.',
   skills: 'Use "ls" to explore the file system or "cat skills" for a quick overview',
   projects: '3 major projects: AI Study Assistant, Data Dashboard, and Productivity App',
@@ -14,6 +15,7 @@ const commands = {
   echo: 'Type "echo [message]" to echo a message',
   pwd: '/home/danielwahba/portfolio',
   clear: '',
+  ai: '🤖 AI Assistant: Ask me anything about Daniel\'s skills, experience, or projects! Example: "ai tell me about his React experience"',
 }
 
 type Log = {
@@ -24,12 +26,13 @@ type Log = {
 
 export default function Terminal() {
   const [logs, setLogs] = useState<Log[]>([
-    { id: '1', text: 'Welcome to Daniel\'s Interactive Terminal', isInput: false },
-    { id: '2', text: 'Type "help" for available commands', isInput: false },
+    { id: '1', text: '🤖 Welcome to Daniel\'s Interactive Terminal with AI Assistant!', isInput: false },
+    { id: '2', text: 'Type "help" for commands or "ai [question]" to chat with the AI assistant', isInput: false },
   ])
   const [input, setInput] = useState('')
   const [visible, setVisible] = useState(false)
   const logsEndRef = useRef<HTMLDivElement>(null)
+  const { generateResponse, isTyping } = useAIAssistant()
 
   useEffect(() => {
     logsEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -47,13 +50,53 @@ export default function Terminal() {
 
     if (trimmed === 'clear') {
       setLogs([{ id: 'cleared', text: 'Terminal cleared', isInput: false }])
-    } else if (trimmed.startsWith('echo ')) {
-      const message = cmd.substring(5)
-      newLogs.push({
-        id: `output-${Date.now()}`,
-        text: message,
-        isInput: false,
-      })
+    } else if (trimmed.startsWith('ai ')) {
+      const question = cmd.substring(3).trim()
+      if (question) {
+        // Add typing indicator
+        newLogs.push({
+          id: `ai-typing-${Date.now()}`,
+          text: '🤖 AI Assistant is thinking...',
+          isInput: false,
+        })
+        setLogs(newLogs)
+        setInput('')
+
+        // Generate AI response asynchronously
+        generateResponse(question).then(aiResponse => {
+          setLogs(prevLogs => {
+            // Remove typing indicator and add response
+            const filteredLogs = prevLogs.filter(log => !log.id.includes('ai-typing'))
+            return [
+              ...filteredLogs,
+              {
+                id: `ai-response-${Date.now()}`,
+                text: `🤖 ${aiResponse}`,
+                isInput: false,
+              }
+            ]
+          })
+        }).catch(() => {
+          setLogs(prevLogs => {
+            const filteredLogs = prevLogs.filter(log => !log.id.includes('ai-typing'))
+            return [
+              ...filteredLogs,
+              {
+                id: `ai-error-${Date.now()}`,
+                text: '🤖 Sorry, I\'m having trouble processing your request. Please try again.',
+                isInput: false,
+              }
+            ]
+          })
+        })
+        return // Exit early since we're handling this asynchronously
+      } else {
+        newLogs.push({
+          id: `output-${Date.now()}`,
+          text: '🤖 Please ask me a question! Example: "ai tell me about his React experience"',
+          isInput: false,
+        })
+      }
     } else if (trimmed in commands) {
       const response = commands[trimmed as keyof typeof commands]
       if (response) {
@@ -104,7 +147,9 @@ export default function Terminal() {
           >
             {/* Simple CMD title */}
             <div className="flex items-center justify-between border-b border-gray-600 bg-gray-800 px-4 py-2">
-              <h3 className="font-mono text-sm font-semibold text-white">Command Prompt - portfolio@daniel</h3>
+              <h3 className="font-mono text-sm font-semibold text-white">
+                Command Prompt - portfolio@daniel {isTyping && <span className="text-cyan-400">(AI thinking...)</span>}
+              </h3>
               <button
                 onClick={() => setLogs([{ id: 'cleared', text: 'Terminal cleared', isInput: false }])}
                 className="text-gray-400 hover:text-white transition-colors text-xs px-2 py-1 rounded border border-gray-600 hover:border-gray-400"
