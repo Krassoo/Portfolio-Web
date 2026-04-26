@@ -38,13 +38,13 @@ export default function ContactSection() {
                 github.com/Krassoo
               </a>
               <a
-                href="https://www.linkedin.com"
+                href="https://www.linkedin.com/in/daniel-wahba-krasilchik-477b11279"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-3 rounded-3xl bg-slate-950/90 px-5 py-4 text-sm text-slate-100 transition hover:bg-blue-500/10"
               >
                 <FiLinkedin className="h-5 w-5 text-blue-300" />
-                linkedin.com/in/danielwahba
+                linkedin.com/in/daniel-wahba-krasilchik-477b11279
               </a>
             </div>
           </div>
