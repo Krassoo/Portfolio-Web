@@ -11,6 +11,7 @@ import ProjectsSection from './sections/ProjectsSection'
 import ContactSection from './sections/ContactSection'
 import useActiveSection from './hooks/useActiveSection'
 import { ThemeProvider } from './hooks/useTheme'
+import { ToastProvider } from './contexts/ToastContext'
 
 const sectionIds = ['home', 'about', 'experience', 'skills', 'projects', 'contact']
 
@@ -44,7 +45,9 @@ function AppContent() {
 function App() {
   return (
     <ThemeProvider>
-      <AppContent />
+      <ToastProvider>
+        <AppContent />
+      </ToastProvider>
     </ThemeProvider>
   )
 }

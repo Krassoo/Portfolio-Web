@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Editor from '@monaco-editor/react'
 import { motion } from 'framer-motion'
+import { useToast } from '../contexts/ToastContext'
 
 type CodeExample = {
   title: string
@@ -233,6 +234,8 @@ export default function CodePlayground() {
   const [output, setOutput] = useState('')
   const [isRunning, setIsRunning] = useState(false)
 
+  const { addToast } = useToast()
+
   const currentExample = codeExamples[selectedExample]
 
   const handleExampleChange = (exampleKey: ExampleKey) => {
@@ -245,6 +248,12 @@ export default function CodePlayground() {
     setIsRunning(true)
     setOutput('')
 
+    addToast(
+      'info',
+      'Running code...',
+      `Executing ${currentExample.title}`
+    )
+
     // Simulate code execution (in a real implementation, this would use a code execution service)
     setTimeout(() => {
       if (selectedExample === 'algorithm') {
@@ -255,21 +264,36 @@ Index found: 5
 Target: 8
 Index found: -1
 
-✅ Binary search executed successfully!`)
+Binary search executed successfully!`)
+        addToast(
+          'success',
+          'Algorithm executed!',
+          'Binary search completed successfully'
+        )
       } else if (selectedExample === 'api') {
-        setOutput(`🚀 API Client initialized
-📡 Making request to https://jsonplaceholder.typicode.com/users
-✅ Users fetched successfully
-📝 Sample users displayed in console
+        setOutput(`API Client initialized
+Making request to https://jsonplaceholder.typicode.com/users
+Users fetched successfully
+Sample users displayed in console
 
-🔧 API integration demonstrated with proper error handling!`)
+API integration demonstrated with proper error handling!`)
+        addToast(
+          'success',
+          'API demo completed!',
+          'REST API integration simulated successfully'
+        )
       } else {
-        setOutput(`⚛️ React component rendered successfully!
-🎨 Modern UI with responsive design
-🔧 TypeScript integration working
-✅ Component lifecycle demonstrated
+        setOutput(`React component rendered successfully!
+Modern UI with responsive design
+TypeScript integration working
+Component lifecycle demonstrated
 
-🎯 This showcases production-ready React development!`)
+This showcases production-ready React development!`)
+        addToast(
+          'success',
+          'React component rendered!',
+          'Modern React development demonstrated'
+        )
       }
       setIsRunning(false)
     }, 1500)
@@ -350,7 +374,7 @@ Index found: -1
             whileHover={!isRunning ? { scale: 1.02 } : {}}
             whileTap={!isRunning ? { scale: 0.98 } : {}}
           >
-            {isRunning ? '🔄 Running Code...' : '▶️ Run Code'}
+            {isRunning ? 'Running Code...' : 'Run Code'}
           </motion.button>
 
           {/* Output console */}
@@ -367,7 +391,7 @@ Index found: -1
         </div>
 
         <div className="text-xs text-slate-500 light:text-slate-600 border-t border-slate-700/50 pt-4 light:border-slate-300">
-          💻 Edit the code above and click "Run Code" to see it in action! This demonstrates real development workflow.
+          Edit the code above and click "Run Code" to see it in action! This demonstrates real development workflow.
         </div>
       </div>
     </div>

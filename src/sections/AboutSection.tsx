@@ -12,7 +12,7 @@ const highlights = [
     description: 'Optimized components and page load to create fast, responsive web experiences.',
   },
   {
-    icon: '🤝',
+    icon: '👥',
     title: 'Team Collaboration',
     description: 'Worked in agile squads with product, design, and backend engineers on real products.',
   },

@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
+import { useToast } from '../contexts/ToastContext'
 
 type Theme = 'light' | 'dark'
 
@@ -15,6 +16,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     return saved || 'dark'
   })
 
+  const { addToast } = useToast()
+
   useEffect(() => {
     const root = document.documentElement
     root.classList.remove('light', 'dark')
@@ -23,7 +26,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, [theme])
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
+    const newTheme = theme === 'dark' ? 'light' : 'dark'
+    setTheme(newTheme)
+    addToast(
+      'info',
+      `Switched to ${newTheme} mode`,
+      `Enjoy the ${newTheme} theme!`
+    )
   }
 
   return (

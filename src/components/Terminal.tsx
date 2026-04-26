@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useRef, useEffect } from 'react'
 import { useAIAssistant } from '../hooks/useAIAssistant'
+import { useToast } from '../contexts/ToastContext'
 
 const commands = {
   help: 'Available commands: help | about | skills | projects | contact | experience | clear | whoami | ls | ai [question]',
@@ -9,13 +10,13 @@ const commands = {
   projects: '3 major projects: AI Study Assistant, Data Dashboard, and Productivity App',
   contact: 'Email: danielwahbakrasil@gmail.com | GitHub: github.com/Krassoo',
   experience: 'Docflo.ai (Israel) - Frontend Developer | Working with React, APIs, and agile teams',
-  whoami: 'You are a curious recruiter exploring my interactive portfolio! 🎯',
+  whoami: 'You are a curious recruiter exploring my interactive portfolio!',
   'cat skills': 'Frontend: React, TypeScript, JavaScript | Backend: Python, SQL, APIs | Tools: Git, Playwright, Agile',
   ls: 'frontend/  backend/  tools/  projects/  experience/',
   echo: 'Type "echo [message]" to echo a message',
   pwd: '/home/danielwahba/portfolio',
   clear: '',
-  ai: '🤖 AI Assistant: Ask me anything about Daniel\'s skills, experience, or projects! Example: "ai tell me about his React experience"',
+  ai: 'AI Assistant: Ask me anything about Daniel\'s skills, experience, or projects! Example: "ai tell me about his React experience"',
 }
 
 type Log = {
@@ -26,14 +27,14 @@ type Log = {
 
 export default function Terminal() {
   const [logs, setLogs] = useState<Log[]>([
-    { id: '1', text: '🤖 Welcome to Daniel\'s Interactive Terminal with AI Assistant!', isInput: false },
+    { id: '1', text: 'Welcome to Daniel\'s Interactive Terminal with AI Assistant!', isInput: false },
     { id: '2', text: 'Type "help" for commands or "ai [question]" to chat with the AI assistant', isInput: false },
   ])
   const [input, setInput] = useState('')
   const [visible, setVisible] = useState(false)
   const logsEndRef = useRef<HTMLDivElement>(null)
-  const { generateResponse, isTyping } = useAIAssistant()
-
+  const { generateResponse } = useAIAssistant()
+  const { addToast } = useToast()
   useEffect(() => {
     logsEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [logs])
@@ -50,13 +51,14 @@ export default function Terminal() {
 
     if (trimmed === 'clear') {
       setLogs([{ id: 'cleared', text: 'Terminal cleared', isInput: false }])
+      addToast('info', 'Terminal cleared', 'All logs have been removed')
     } else if (trimmed.startsWith('ai ')) {
       const question = cmd.substring(3).trim()
       if (question) {
         // Add typing indicator
         newLogs.push({
           id: `ai-typing-${Date.now()}`,
-          text: '🤖 AI Assistant is thinking...',
+          text: 'AI Assistant is thinking...',
           isInput: false,
         })
         setLogs(newLogs)
@@ -71,11 +73,12 @@ export default function Terminal() {
               ...filteredLogs,
               {
                 id: `ai-response-${Date.now()}`,
-                text: `🤖 ${aiResponse}`,
+                text: `${aiResponse}`,
                 isInput: false,
               }
             ]
           })
+          addToast('success', 'AI Response Ready', 'Your question has been answered')
         }).catch(() => {
           setLogs(prevLogs => {
             const filteredLogs = prevLogs.filter(log => !log.id.includes('ai-typing'))
@@ -83,17 +86,18 @@ export default function Terminal() {
               ...filteredLogs,
               {
                 id: `ai-error-${Date.now()}`,
-                text: '🤖 Sorry, I\'m having trouble processing your request. Please try again.',
+                text: 'Sorry, I\'m having trouble processing your request. Please try again.',
                 isInput: false,
               }
             ]
           })
+          addToast('error', 'AI Error', 'Unable to process your question')
         })
         return // Exit early since we're handling this asynchronously
       } else {
         newLogs.push({
           id: `output-${Date.now()}`,
-          text: '🤖 Please ask me a question! Example: "ai tell me about his React experience"',
+          text: 'Please ask me a question! Example: "ai tell me about his React experience"',
           isInput: false,
         })
       }
@@ -105,6 +109,7 @@ export default function Terminal() {
           text: response,
           isInput: false,
         })
+        addToast('success', 'Command executed', `Ran: ${trimmed}`)
       }
     } else {
       newLogs.push({
@@ -112,6 +117,7 @@ export default function Terminal() {
         text: `command not found: ${cmd}`,
         isInput: false,
       })
+      addToast('warning', 'Command not found', `Unknown command: ${trimmed}`)
     }
 
     setLogs(newLogs)
@@ -148,7 +154,7 @@ export default function Terminal() {
             {/* Simple CMD title */}
             <div className="flex items-center justify-between border-b border-gray-600 bg-gray-800 px-4 py-2">
               <h3 className="font-mono text-sm font-semibold text-white">
-                Command Prompt - portfolio@daniel {isTyping && <span className="text-cyan-400">(AI thinking...)</span>}
+                Command Prompt - portfolio@daniel
               </h3>
               <button
                 onClick={() => setLogs([{ id: 'cleared', text: 'Terminal cleared', isInput: false }])}
