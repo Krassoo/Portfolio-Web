@@ -20,7 +20,7 @@ function AppContent() {
   const activeSection = useActiveSection(sectionIds)
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setLoading(false), 2100)
+    const timer = window.setTimeout(() => setLoading(false), 500)
     return () => window.clearTimeout(timer)
   }, [])
 
